@@ -27,7 +27,6 @@ const menuData = [
     { name: "능동미나리 - 미나리 곰탕", category: "korean" },
     { name: "미스터초우 - 쭈꾸미 직화", category: "korean" },
     { name: "쌍대포 - 맷돌순두부", category: "korean" },
-    { name: "무청감자탕 - 뼈해장국", category: "korean" },
     { name: "용호동낙지 - 낙곱새", category: "korean" },
     { name: "마마된장 - 우렁된장", category: "korean" },
     { name: "오한수우육면가 - 홍콩우육면", category: "chinese" },

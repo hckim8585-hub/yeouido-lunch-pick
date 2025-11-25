@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="ko">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,13 +10,14 @@
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
     <div class="container">
         <header>
             <h1>오늘 점심 뭐 먹지?</h1>
             <p class="subtitle">고민하지 말고 버튼을 눌러보세요!</p>
         </header>
-        
+
         <main>
             <div class="menu-display-area">
                 <div class="card">
@@ -29,7 +31,15 @@
                     </a>
                 </div>
             </div>
-            
+
+            <div class="category-container">
+                <button class="category-btn active" data-category="all">전체</button>
+                <button class="category-btn" data-category="korean">한식</button>
+                <button class="category-btn" data-category="chinese">중식</button>
+                <button class="category-btn" data-category="western">양식</button>
+                <button class="category-btn" data-category="asian">일식/아시안</button>
+            </div>
+
             <button id="pick-btn" class="cta-button">
                 <span class="btn-text">점심 메뉴 고르기</span>
                 <span class="btn-icon">🎲</span>
@@ -42,4 +52,5 @@
     </div>
     <script src="script.js"></script>
 </body>
+
 </html>

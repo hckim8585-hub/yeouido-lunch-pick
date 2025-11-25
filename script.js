@@ -72,6 +72,8 @@ categoryBtns.forEach(btn => {
 
         // Filter logic
         currentCategory = btn.dataset.category;
+
+        // Reset filteredMenus based on current selection
         if (currentCategory === 'all') {
             filteredMenus = menuData.map(item => item.name);
         } else {
@@ -79,6 +81,8 @@ categoryBtns.forEach(btn => {
                 .filter(item => item.category === currentCategory)
                 .map(item => item.name);
         }
+
+        console.log(`Category changed to: ${currentCategory}, Items: ${filteredMenus.length}`);
 
         // Visual feedback
         menuText.innerText = "메뉴를 골라주세요";
@@ -90,7 +94,17 @@ categoryBtns.forEach(btn => {
 });
 
 function getRandomMenu() {
-    return filteredMenus[Math.floor(Math.random() * filteredMenus.length)];
+    // Double check filtering just in case
+    let currentList = filteredMenus;
+    if (currentCategory !== 'all') {
+        const strictList = menuData
+            .filter(item => item.category === currentCategory)
+            .map(item => item.name);
+        if (strictList.length > 0) {
+            currentList = strictList;
+        }
+    }
+    return currentList[Math.floor(Math.random() * currentList.length)];
 }
 
 function pickMenu() {

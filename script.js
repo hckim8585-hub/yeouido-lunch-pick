@@ -116,6 +116,9 @@ categoryBtns.forEach(btn => {
         // Visual feedback
         menuText.innerText = "메뉴를 골라주세요";
         menuIcon.innerText = "🍽️";
+        menuText.style.color = ''; // Reset color
+        menuIcon.style.transform = ''; // Reset transform
+        menuIcon.style.transition = ''; // Reset transition to CSS default
         card.classList.remove('highlight');
         menuText.classList.remove('result-anim');
         document.getElementById('map-container').classList.remove('visible');
@@ -136,12 +139,17 @@ function getRandomMenu() {
     return currentList[Math.floor(Math.random() * currentList.length)];
 }
 
+const colors = ['#FF6B6B', '#4ECDC4', '#FFD93D', '#6C5CE7', '#A8E6CF', '#FF8B94'];
+
 function pickMenu() {
     if (isAnimating) return;
     isAnimating = true;
     pickBtn.disabled = true;
     card.classList.remove('highlight');
     menuText.classList.remove('result-anim');
+    menuText.style.color = ''; // Reset color
+    menuIcon.style.transform = ''; // Reset transform
+    menuIcon.style.transition = 'none'; // Disable transition for jitter effect
     document.getElementById('map-container').classList.remove('visible');
 
     let counter = 0;
@@ -151,9 +159,14 @@ function pickMenu() {
     const interval = setInterval(() => {
         menuText.innerText = getRandomMenu();
         menuIcon.innerText = ['🍽️', '🥢', '🥄', '🍴', '🥡', '🍜', '🥘'][Math.floor(Math.random() * 7)];
+
+        // Visual effects
+        menuText.style.color = colors[Math.floor(Math.random() * colors.length)];
+        menuIcon.style.transform = `rotate(${Math.random() * 20 - 10}deg) scale(${0.9 + Math.random() * 0.2})`;
+
         counter++;
 
-        if (counter > 20) {
+        if (counter > 15) { // Reduced from 20 to 15 for 20% faster initial phase
             // 속도 줄이기 위한 준비
             clearInterval(interval);
             slowDown(speed);
@@ -162,13 +175,18 @@ function pickMenu() {
 }
 
 function slowDown(currentSpeed) {
-    let speed = currentSpeed * 1.2; // 속도 점차 느리게
+    let speed = currentSpeed * 1.35; // Increased to 1.35 for faster slowdown
 
     if (speed > 400) {
         // 최종 선택
         const finalMenu = getRandomMenu();
         menuText.innerText = finalMenu;
         menuIcon.innerText = '🎉';
+
+        // Final visual state
+        menuText.style.color = 'var(--primary-dark)';
+        menuIcon.style.transition = 'transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1)'; // Enable transition for final pop
+        menuIcon.style.transform = 'scale(1.2) rotate(0deg)';
 
         // 결과 효과
         menuText.classList.add('result-anim');
@@ -189,6 +207,10 @@ function slowDown(currentSpeed) {
     }
 
     menuText.innerText = getRandomMenu();
+    // Visual effects during slowdown
+    menuText.style.color = colors[Math.floor(Math.random() * colors.length)];
+    menuIcon.style.transform = `rotate(${Math.random() * 20 - 10}deg) scale(${0.9 + Math.random() * 0.2})`;
+
     setTimeout(() => slowDown(speed), speed);
 }
 
